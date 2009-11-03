@@ -127,7 +127,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
             } else {
                 index.setChange(null);
             }
-            
+
             if (diff != null && !StringUtils.equalsIgnoreCase(diff, "null")){
                 double valueD = json.getDouble("Point");
                 double diffD = json.getDouble("Difference");
