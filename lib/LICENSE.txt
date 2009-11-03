@@ -1,0 +1,10 @@
+Agile Stock use following opensource softwares:
+
+* Commons IO, commons-io-1.4.jar
+** Apache License http://commons.apache.org/license.html
+* Commons Lang, commons-lang-2.4.jar
+** Apache License http://commons.apache.org/license.html
+* HtmlCleaner, htmlcleaner2_1.jar
+** BSD License, http://htmlcleaner.sourceforge.net/license.php
+* XStream, xstream-android.jar
+** BSD License, http://xstream.codehaus.org/license.html
