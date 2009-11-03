@@ -45,13 +45,13 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
             
             double price = json.getDouble("np");
             double change = price - preClosePrice;
-            double changePercent = (price - preClosePrice) * 100.0 / preClosePrice;
+            double changePercent = (price - preClosePrice) / preClosePrice;
             
             Log.i(TAG, "change and change percent: " + change + ", " + changePercent + 
                     ". preClose: " + preClosePrice + ", price =" + price);
             d.setPrice(new BigDecimal(json.getString("np")));
-            d.setChangePrice(new BigDecimal(rounded(change, 1000.0)));
-            d.setChangePricePercent(new BigDecimal(rounded(changePercent, 100.0)));
+            d.setChangePrice(new BigDecimal(change));
+            d.setChangePricePercent(new BigDecimal(changePercent));
             d.setDayHigh(new BigDecimal(json.getString("dyh")));
             d.setDayLow(new BigDecimal(json.getString("dyl")));
             d.setQuote(quote);

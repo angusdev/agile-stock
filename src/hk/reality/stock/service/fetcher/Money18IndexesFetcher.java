@@ -1,6 +1,5 @@
 package hk.reality.stock.service.fetcher;
 
-import static hk.reality.stock.service.fetcher.Utils.rounded;
 import hk.reality.stock.R;
 import hk.reality.stock.model.Index;
 import hk.reality.stock.service.exception.DownloadException;
@@ -57,12 +56,12 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
             
             double value = json.getDouble("value");
             double change = json.getDouble("difference");
-            double changePercent = change * 100.0 / value;
+            double changePercent = change / value;
             
             hsi.setName(getContext().getString(R.string.msg_hsi));
             hsi.setValue(new BigDecimal(json.getString("value")));
-            hsi.setChange(new BigDecimal(rounded(change, 1000.0)));
-            hsi.setChangePercent(new BigDecimal(rounded(changePercent, 100.0)));
+            hsi.setChange(new BigDecimal(change));
+            hsi.setChangePercent(new BigDecimal(changePercent));
     
             return hsi;
         } catch (org.apache.http.ParseException pe) {
@@ -131,7 +130,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
             if (diff != null && !StringUtils.equalsIgnoreCase(diff, "null")){
                 double valueD = json.getDouble("Point");
                 double diffD = json.getDouble("Difference");
-                index.setChangePercent(new BigDecimal((diffD)/(valueD-diffD)*100.0));
+                index.setChangePercent(new BigDecimal(diffD/(valueD-diffD)));
             } else {
                 index.setChangePercent(null);
             }
