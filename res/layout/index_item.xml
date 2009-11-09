@@ -20,9 +20,9 @@
 	<TextView android:layout_height="wrap_content"
 		android:gravity="right" android:id="@+id/volume" android:text="12345678"
 		android:paddingRight="10sp"
-		android:layout_toRightOf="@+id/time" android:layout_width="180sp" android:layout_below="@+id/name"></TextView>
+		android:layout_toRightOf="@+id/time" android:layout_width="180sp" android:layout_below="@+id/name" android:textStyle="bold"></TextView>
 	<TextView android:layout_height="wrap_content" android:id="@+id/change"
 		android:gravity="right" android:text="+1.5 (+0.02%) "
-		android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_below="@+id/name"></TextView>
+		android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_below="@+id/name" android:textStyle="bold"></TextView>
 
 </RelativeLayout>

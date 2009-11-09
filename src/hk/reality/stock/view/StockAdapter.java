@@ -49,9 +49,9 @@ public class StockAdapter extends ArrayAdapter<Stock> {
             volume.setText(detail.getVolume());
             name.setText(stock.getName());
             quote.setText(detail.getQuote());
-            price.setText(PriceFormatter.forPrice(detail.getPrice().doubleValue()));
+            price.setText(PriceFormatter.forStockPrice(detail.getPrice().doubleValue()));
             change.setText(String.format("%s (%s)", 
-            		PriceFormatter.forPrice(detail.getChangePrice().doubleValue()), 
+            		PriceFormatter.forStockPrice(detail.getChangePrice().doubleValue()), 
             		PriceFormatter.forPercent(detail.getChangePricePercent().doubleValue())));
             
             if (detail.getChangePrice().floatValue() > 0) {
@@ -59,7 +59,7 @@ public class StockAdapter extends ArrayAdapter<Stock> {
                 change.setTextColor(Color.rgb(0, 213, 65));
             } else if (detail.getChangePrice().floatValue() < 0) {
                 price.setTextColor(Color.rgb(238, 30, 0));
-                change.setTextColor(Color.rgb(238, 30, 0));
+                change.setTextColor(Color.rgb(238, 90, 60));
             } else {
                 price.setTextColor(Color.WHITE);
                 change.setTextColor(Color.WHITE);

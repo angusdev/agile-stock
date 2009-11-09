@@ -21,9 +21,9 @@
 	<TextView android:layout_height="wrap_content" android:text="10:10" android:id="@+id/time" android:layout_below="@+id/name" android:layout_width="50sp"></TextView>
 	<TextView android:layout_height="wrap_content"
 		android:gravity="right" android:id="@+id/volume" android:text="12345678"
-		android:layout_toRightOf="@+id/time" android:layout_below="@+id/name" android:layout_width="160sp" android:paddingRight="8sp"></TextView>
+		android:layout_toRightOf="@+id/time" android:layout_below="@+id/name" android:layout_width="160sp" android:paddingRight="8sp" android:textStyle="bold"></TextView>
 	<TextView android:layout_height="wrap_content" android:id="@+id/change"
 		android:gravity="right" android:text="+1.5 (+0.02%) "
-		android:layout_below="@+id/name" android:layout_toRightOf="@+id/volume" android:layout_width="fill_parent"></TextView>
+		android:layout_below="@+id/name" android:layout_toRightOf="@+id/volume" android:layout_width="fill_parent" android:textStyle="bold"></TextView>
 
 </RelativeLayout>

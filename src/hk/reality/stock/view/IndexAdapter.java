@@ -43,7 +43,7 @@ public class IndexAdapter extends ArrayAdapter<Index> {
         if (index != null) {
             volume.setText("");
             name.setText(index.getName());
-            price.setText(PriceFormatter.forPrice(index.getValue().doubleValue()));
+            price.setText(PriceFormatter.forIndexPrice(index.getValue().doubleValue()));
 
             if (index.getUpdatedAt() != null) {
                 time.setText(formatter.format(index.getUpdatedAt().getTime()));
@@ -53,7 +53,7 @@ public class IndexAdapter extends ArrayAdapter<Index> {
             
             if (index.getChange() != null) {
                 change.setText(String.format("%s (%s)", 
-                		PriceFormatter.forPrice(index.getChange().doubleValue()), 
+                		PriceFormatter.forStockPrice(index.getChange().doubleValue()), 
                 		PriceFormatter.forPercent(index.getChangePercent().doubleValue())));
             } else {
                 change.setText("---- (---)");
@@ -64,7 +64,7 @@ public class IndexAdapter extends ArrayAdapter<Index> {
                 change.setTextColor(Color.rgb(0, 213, 65));
             } else if (index.getChange() != null && index.getChange().floatValue() < 0) {
                 price.setTextColor(Color.rgb(238, 30, 0));
-                change.setTextColor(Color.rgb(238, 30, 0));
+                change.setTextColor(Color.rgb(238, 90, 60));
             } else {
                 price.setTextColor(Color.WHITE);
                 change.setTextColor(Color.WHITE);
