@@ -2,13 +2,11 @@ package hk.reality.stock;
 
 import hk.reality.stock.service.fetcher.IndexesUpdateTask;
 import hk.reality.stock.view.IndexAdapter;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.TextView;
 
 public class IndexActivity extends BaseStockActivity {

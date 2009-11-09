@@ -1,6 +1,5 @@
 package hk.reality.stock;
 
-import hk.reality.stock.model.Index;
 import hk.reality.stock.model.Portfolio;
 import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.FilePortfolioService;
