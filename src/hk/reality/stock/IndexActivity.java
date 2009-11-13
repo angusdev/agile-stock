@@ -2,6 +2,10 @@ package hk.reality.stock;
 
 import hk.reality.stock.service.fetcher.IndexesUpdateTask;
 import hk.reality.stock.view.IndexAdapter;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +15,8 @@ import android.widget.TextView;
 
 public class IndexActivity extends BaseStockActivity {
     public static final String TAG = "IndexActivity";
+    public static final int DIALOG_ERR_DOWNLOAD = 410;
+    public static final int DIALOG_ERR_PARSE = 411;    
     private IndexAdapter adapter;
 
     @Override
@@ -54,6 +60,40 @@ public class IndexActivity extends BaseStockActivity {
         default:
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_ERR_PARSE:
+            final AlertDialog quoteErrDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.msg_error_stock)
+                .setMessage(R.string.msg_error_stock_details)
+                .setPositiveButton(R.string.ok_label, new OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }                    
+                })
+                .setCancelable(true)
+                .create();
+            return quoteErrDialog;
+        case DIALOG_ERR_DOWNLOAD:
+            final AlertDialog quoteUpdateErrDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.msg_error_download)
+                .setPositiveButton(R.string.ok_label, new OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }                    
+                })
+                .setMessage(R.string.msg_error_download_details)
+                .setCancelable(true)
+                .create();
+            return quoteUpdateErrDialog;
+        default:
+        }
+        return super.onCreateDialog(id);
     }
 
 }

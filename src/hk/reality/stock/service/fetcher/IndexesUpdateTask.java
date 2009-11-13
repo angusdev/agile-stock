@@ -1,7 +1,6 @@
 package hk.reality.stock.service.fetcher;
 
 import hk.reality.stock.IndexActivity;
-import hk.reality.stock.PortfolioActivity;
 import hk.reality.stock.R;
 import hk.reality.stock.model.Index;
 import hk.reality.stock.service.exception.DownloadException;
@@ -92,13 +91,13 @@ public class IndexesUpdateTask extends AsyncTask<Void, Integer, Boolean> {
                 Toast.makeText(activity, R.string.msg_no_network, Toast.LENGTH_LONG).show();
                 break;
             case ERROR_DOWNLOAD:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_QUOTE);
+                activity.showDialog(IndexActivity.DIALOG_ERR_DOWNLOAD);
                 break;
             case ERROR_PARSE:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_QUOTE_UPDATE);
+                activity.showDialog(IndexActivity.DIALOG_ERR_PARSE);
                 break;
             case ERROR_UNKNOWN:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_UNEXPECTED);
+                activity.showDialog(IndexActivity.DIALOG_ERR_UNEXPECTED);
                 break;
             default:
                 break;

@@ -76,7 +76,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     }
     
     private String getHSIURL() {
-        return "http://money18.on.cc/js/real/index/HSI_r.js";
+        return "http://money18.on.cc/js/reals/index/HSI_r.js";
     }
     
     private String getWorldIndexURL() {

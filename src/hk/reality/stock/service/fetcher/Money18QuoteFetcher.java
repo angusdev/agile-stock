@@ -95,7 +95,7 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     }
     
     private String getUpdateUrl(String quote) {
-        return String.format("http://money18.on.cc/js/real/quote/%s_r.js", quote);
+        return String.format("http://money18.on.cc/js/reals/quote/%s_r.js", quote);
     }
 
 }
