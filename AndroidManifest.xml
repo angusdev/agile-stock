@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="hk.reality.stock" android:versionCode="24"
-	android:versionName="0.4.9">
+	package="hk.reality.stock" android:versionCode="25"
+	android:versionName="0.4.10">
 	<application android:label="@string/app_name" android:name="StockApplication"
 		android:icon="@drawable/as">
-		<uses-library android:name="android.test.runner" />
 		<activity android:name=".MainActivity" android:label="@string/app_name"
 			android:screenOrientation="portrait" android:launchMode="singleTask">
 			<intent-filter>
@@ -17,9 +16,11 @@
 		<activity android:name=".QuickStockActivity"></activity>
 		<activity android:name=".SettingsActivity"></activity>
 	</application>
-	<instrumentation android:name="android.test.InstrumentationTestRunner"
-		android:targetPackage="hk.reality.stock" android:label="Stock" />
-	<uses-sdk android:minSdkVersion="3" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="5" />
+	<supports-screens android:smallScreens="true"
+		android:normalScreens="true"
+		android:largeScreens="true"
+		android:anyDensity="true" />
 </manifest> 
