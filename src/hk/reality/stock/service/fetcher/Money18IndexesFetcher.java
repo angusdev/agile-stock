@@ -24,6 +24,7 @@ import android.content.Context;
 
 public class Money18IndexesFetcher extends BaseIndexesFetcher {
     private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
+   
     private Context context;
     
     public Money18IndexesFetcher(Context context) {
@@ -76,11 +77,15 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     }
     
     private String getHSIURL() {
-        return "http://money18.on.cc/js/reals/index/HSI_r.js";
+        Calendar cal = Calendar.getInstance();
+        return String.format("http://money18.on.cc/js/reals/index/HSI_r.js?t=%s", 
+                cal.getTime().getTime());
     }
     
     private String getWorldIndexURL() {
-        return "http://money18.on.cc/js/daily/worldidx/worldidx_b.js";
+        Calendar cal = Calendar.getInstance();
+        return String.format("http://money18.on.cc/js/daily/worldidx/worldidx_b.js?t=%d", 
+                cal.getTime().getTime());
     }
     
     private JSONObject preprocessJson(String content) throws JSONException {
