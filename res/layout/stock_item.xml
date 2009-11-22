@@ -1,6 +1,6 @@
 <RelativeLayout android:id="@+id/RelativeLayout01"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/item" android:padding="4sp">
+	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/item" android:layout_margin="0sp" android:padding="4sp">
 	<TextView android:id="@+id/name" android:layout_height="wrap_content"
 		android:lines="1" android:shadowRadius="1" android:shadowDx="1"
 		android:shadowDy="1" android:shadowColor="#88444444" android:textSize="22sp"
@@ -18,10 +18,10 @@
 		android:textColor="@color/normal" android:shadowColor="#88444444"
 		android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
 		android:textSize="24sp" android:text="794.100" android:lines="1" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_width="100sp"></TextView>
-	<TextView android:layout_height="wrap_content" android:text="10:10" android:id="@+id/time" android:layout_below="@+id/name" android:layout_width="50sp"></TextView>
+	<TextView android:layout_height="wrap_content" android:text="10:10" android:id="@+id/time" android:layout_below="@+id/name" android:layout_width="80sp"></TextView>
 	<TextView android:layout_height="wrap_content"
 		android:gravity="right" android:id="@+id/volume" android:text="12345678"
-		android:layout_toRightOf="@+id/time" android:layout_below="@+id/name" android:layout_width="160sp" android:paddingRight="8sp" android:textStyle="bold"></TextView>
+		android:layout_toRightOf="@+id/time" android:layout_below="@+id/name" android:paddingRight="8sp" android:textStyle="bold" android:layout_width="120sp"></TextView>
 	<TextView android:layout_height="wrap_content" android:id="@+id/change"
 		android:gravity="right" android:text="+1.5 (+0.02%) "
 		android:layout_below="@+id/name" android:layout_toRightOf="@+id/volume" android:layout_width="fill_parent" android:textStyle="bold"></TextView>

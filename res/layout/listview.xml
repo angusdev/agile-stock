@@ -1,6 +1,6 @@
 <TableLayout android:layout_width="fill_parent"
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/listview_tbl" android:background="@drawable/stripe_repeat">
+	android:id="@+id/listview_tbl" android:background="@drawable/stripe_repeat" android:padding="0sp">
 
 	<ListView android:id="@id/android:list" android:layout_width="fill_parent"
 		android:layout_height="wrap_content"></ListView>
