@@ -96,7 +96,7 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     
     private String getUpdateUrl(String quote) {
         Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/reals/quote/%s_r.js?t=%d", 
+        return String.format("http://money18.on.cc/js/real/quote/%s_r.js?t=%d", 
                 quote, 
                 cal.getTime().getTime());
     }

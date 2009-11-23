@@ -78,7 +78,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     
     private String getHSIURL() {
         Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/reals/index/HSI_r.js?t=%s", 
+        return String.format("http://money18.on.cc/js/real/index/HSI_r.js?t=%s", 
                 cal.getTime().getTime());
     }
     
