@@ -8,3 +8,5 @@ Agile Stock use following opensource softwares:
 ** BSD License, http://htmlcleaner.sourceforge.net/license.php
 * XStream, xstream-android.jar
 ** BSD License, http://xstream.codehaus.org/license.html
+* android-remote-stacktrace
+** MIT License, http://code.google.com/p/android-remote-stacktrace/
