@@ -1,0 +1,40 @@
+<project name="agile-stock" basedir=".">
+
+	<property file="build.properties" />
+
+	<target name="clean">
+		<delete dir="build" />
+		<mkdir dir="build" />
+	</target>
+	
+	<target name="resource-src"
+		description="Generate the R.java file for this project's resources.">
+		<delete dir="gen" />
+		<mkdir dir="gen" />
+		<exec executable="${android.sdk.tools}/aapt">
+			<arg value="package" />
+			<arg value="-m" />
+			<arg value="-J" />
+			<arg file="gen" />
+			<arg value="-M" />
+			<arg file="AndroidManifest.xml" />
+			<arg value="-S" />
+			<arg file="res" />
+			<arg value="-I" />
+			<arg file="${android.sdk}/android.jar" />
+		</exec>
+	</target>
+
+	<target name="compile-main" depends="clean">
+		<mkdir dir="build/classes" />
+		<javac encoding="utf-8" target="1.5" debug="false" destdir="build/classes"
+			bootclasspath="${android.sdk}/android.jar">
+			<src path="src" />
+			<src path="gen" />
+			<classpath>
+				<fileset dir="lib" includes="*.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+</project>
