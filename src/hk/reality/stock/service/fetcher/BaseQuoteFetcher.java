@@ -34,6 +34,7 @@ public abstract class BaseQuoteFetcher implements QuoteFetcher {
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
+        
         this.client = new DefaultHttpClient(cm, params);
 
         this.cleaner = new HtmlCleaner();

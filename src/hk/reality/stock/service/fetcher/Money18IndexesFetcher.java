@@ -12,19 +12,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 public class Money18IndexesFetcher extends BaseIndexesFetcher {
     private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
-   
+    private static final String TAG = "Money18IndexesFetcher";
+
     private Context context;
     
     public Money18IndexesFetcher(Context context) {
@@ -43,7 +47,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
         try {
             Index hsi = new Index();
             HttpGet req = new HttpGet(getHSIURL());
-            req.setHeader("Referer", "http://money18.on.cc/");
+            req.addHeader(new BasicHeader("Referer", getReferer()));
     
             HttpResponse resp = getClient().execute(req);
             String content = EntityUtils.toString(resp.getEntity());
@@ -77,15 +81,17 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     }
     
     private String getHSIURL() {
-        Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/real/index/HSI_r.js?t=%s", 
-                cal.getTime().getTime());
+        String url = String.format("http://money18.on.cc/js/real/index/HSI_r.js?t=%s", 
+                getTimestamp());
+        Log.d(TAG, "HSIURL: " + url);
+        return url;
     }
     
     private String getWorldIndexURL() {
-        Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/daily/worldidx/worldidx_b.js?t=%d", 
-                cal.getTime().getTime());
+        String url = String.format("http://money18.on.cc/js/daily/worldidx/worldidx_b.js?t=%s", 
+                getTimestamp());
+        Log.d(TAG, "WorldIndexURL: " + url);
+        return url;
     }
     
     private JSONObject preprocessJson(String content) throws JSONException {
@@ -98,7 +104,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     private List<Index> getWorldIndexes()  throws ParseException, DownloadException {
         try {
             HttpGet req = new HttpGet(getWorldIndexURL());
-            req.setHeader("Referer", "http://money18.on.cc/");
+            req.addHeader(new BasicHeader("Referer", getReferer()));
     
             HttpResponse resp = getClient().execute(req);
             String content = EntityUtils.toString(resp.getEntity(), "Big5");
@@ -160,4 +166,15 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
         this.context = context;
     }
 
+    private String getReferer() {
+        return "http://money18.on.cc/info/liveinfo_idx.html&refer=refresh";
+    }
+    
+    
+    private String getTimestamp() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Hong Kong"));
+        String ts = cal.getTime().getTime() + "";
+        ts = ts.substring(0, 10) + "7" + ts.substring(11, 13); 
+        return ts;
+    }
 }

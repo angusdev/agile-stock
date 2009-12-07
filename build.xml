@@ -6,7 +6,7 @@
 		<delete dir="build" />
 		<mkdir dir="build" />
 	</target>
-	
+
 	<target name="resource-src"
 		description="Generate the R.java file for this project's resources.">
 		<delete dir="gen" />
@@ -25,7 +25,7 @@
 		</exec>
 	</target>
 
-	<target name="compile-main" depends="clean">
+	<target name="compile" depends="clean,resource-src">
 		<mkdir dir="build/classes" />
 		<javac encoding="utf-8" target="1.5" debug="false" destdir="build/classes"
 			bootclasspath="${android.sdk}/android.jar">
@@ -37,4 +37,13 @@
 		</javac>
 	</target>
 
+	<target name="dex" depends="compile"
+		description="Convert the .class files into .dex files.">
+		<property name="classes.dex" location="build/classes.dex" />
+		<exec executable="${android.sdk.tools}/dx">
+			<arg value="--dex" />
+			<arg value="--output=${classes.dex}" />
+			<arg path="build/classes" />
+		</exec>
+	</target>
 </project>

@@ -1,6 +1,6 @@
 package hk.reality.stock.service.fetcher;
 
-import static hk.reality.stock.service.fetcher.Utils.*;
+import static hk.reality.stock.service.fetcher.Utils.preprocessJson;
 import hk.reality.stock.model.StockDetail;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -23,22 +24,24 @@ import android.util.Log;
 public class Money18QuoteFetcher extends BaseQuoteFetcher {
     private static final String TAG = "Money18QuoteFetcher";
     private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
-    private static final String DATE_PARAM_FORMAT = "yyyyMMdd";
-    
+
     @Override
     public StockDetail fetch(String quote) throws DownloadException, ParseException {
         StockDetail d = new StockDetail();
         String content = null;
-        HttpGet openReq = new HttpGet(getOpenUrl(quote));
-        try {            
-            openReq.setHeader("Referer", "http://money18.on.cc/");
+        String openUrl = getOpenUrl(quote);
+        HttpGet openReq = new HttpGet(openUrl);
+        try {
+            openReq.addHeader("Referer", openUrl);
             HttpResponse resp = getClient().execute(openReq);
             content = EntityUtils.toString(resp.getEntity());
             JSONObject json = preprocessJson(content);
             double preClosePrice = json.getDouble("preCPrice");
 
-            HttpGet req = new HttpGet(getUpdateUrl(quote));
-            req.setHeader("Referer", "http://money18.on.cc/");
+            String updateUrl = getUpdateUrl(quote);
+            HttpGet req = new HttpGet(updateUrl);
+            req.addHeader("Referer", updateUrl);
+
             resp = getClient().execute(req);
             content = EntityUtils.toString(resp.getEntity());
             json = preprocessJson(content);
@@ -88,17 +91,24 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     }
     
     private String getOpenUrl(String quote) {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_PARAM_FORMAT);
-        Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/daily/quote/%s_d.js?t=%s", 
-                quote, formatter.format(cal.getTime()));
+        String url = String.format("http://money18.on.cc/js/daily/quote/%s_d.js?t=%s", 
+                quote, getTimestamp()); 
+        Log.d(TAG, "open url: " + url);
+        return url;
     }
     
     private String getUpdateUrl(String quote) {
-        Calendar cal = Calendar.getInstance();
-        return String.format("http://money18.on.cc/js/real/quote/%s_r.js?t=%d", 
+        String url = String.format("http://money18.on.cc/js/real/quote/%s_r.js?t=%s", 
                 quote, 
-                cal.getTime().getTime());
+                getTimestamp());
+        Log.d(TAG, "update url: " + url);
+        return url;
     }
-
+    
+    private String getTimestamp() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Hong Kong"));
+        String ts = cal.getTime().getTime() + "";
+        ts = ts.substring(0, 10) + "7" + ts.substring(11, 13); 
+        return ts;
+    }
 }
