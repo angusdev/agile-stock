@@ -7,6 +7,7 @@ import hk.reality.stock.model.Stock;
 import hk.reality.stock.model.StockDetail;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
+import hk.reality.utils.ActivityHelper;
 import hk.reality.utils.NetworkDetector;
 
 import java.util.ArrayList;
@@ -123,13 +124,16 @@ public class QuoteUpdateTask extends AsyncTask<Stock, Integer, Boolean> {
                 Toast.makeText(activity, R.string.msg_no_network, Toast.LENGTH_LONG).show();
                 break;
             case ERROR_DOWNLOAD:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_DOWNLOAD_UPDATE);
+                ActivityHelper.showDialogQuitely(activity, 
+                        PortfolioActivity.DIALOG_ERR_DOWNLOAD_UPDATE);
                 break;
             case ERROR_PARSE:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_QUOTE_UPDATE);
+                ActivityHelper.showDialogQuitely(activity, 
+                        PortfolioActivity.DIALOG_ERR_QUOTE_UPDATE);
                 break;
             case ERROR_UNKNOWN:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_UNEXPECTED);
+                ActivityHelper.showDialogQuitely(activity, 
+                        PortfolioActivity.DIALOG_ERR_UNEXPECTED);
                 break;
             default:
                 break;

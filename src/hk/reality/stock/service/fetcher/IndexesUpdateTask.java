@@ -6,6 +6,7 @@ import hk.reality.stock.model.Index;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 import hk.reality.stock.view.IndexAdapter;
+import hk.reality.utils.ActivityHelper;
 import hk.reality.utils.NetworkDetector;
 
 import java.util.List;
@@ -91,13 +92,16 @@ public class IndexesUpdateTask extends AsyncTask<Void, Integer, Boolean> {
                 Toast.makeText(activity, R.string.msg_no_network, Toast.LENGTH_LONG).show();
                 break;
             case ERROR_DOWNLOAD:
-                activity.showDialog(IndexActivity.DIALOG_ERR_DOWNLOAD);
+                ActivityHelper.showDialogQuitely(activity, 
+                        IndexActivity.DIALOG_ERR_DOWNLOAD);
                 break;
             case ERROR_PARSE:
-                activity.showDialog(IndexActivity.DIALOG_ERR_PARSE);
+                ActivityHelper.showDialogQuitely(activity,
+                        IndexActivity.DIALOG_ERR_PARSE);
                 break;
             case ERROR_UNKNOWN:
-                activity.showDialog(IndexActivity.DIALOG_ERR_UNEXPECTED);
+                ActivityHelper.showDialogQuitely(activity,
+                        IndexActivity.DIALOG_ERR_UNEXPECTED);
                 break;
             default:
                 break;
