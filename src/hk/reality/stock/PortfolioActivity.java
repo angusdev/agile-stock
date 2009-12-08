@@ -257,7 +257,6 @@ public class PortfolioActivity extends BaseStockActivity {
         super.onListItemClick(l, v, position, id);
         final Stock stock = adapter.getItem(position);
         final String name = stock.getDetail() == null ? stock.getQuote() : stock.getName();
-
         new AlertDialog.Builder(this)
             .setTitle(name)
             .setItems(R.array.stock_action,
@@ -265,6 +264,10 @@ public class PortfolioActivity extends BaseStockActivity {
                         public void onClick(DialogInterface dialoginterface, int i) {
                             switch (i) {
                             case MENU_OPEN:
+                                if (stock == null || stock.getDetail() == null) {
+                                    Log.w(TAG, "stock detail not loaded, ignore click from user");
+                                    return;
+                                }
                                 Log.d(TAG, "open url ...");
                                 Uri uri = Uri.parse(stock.getDetail().getSourceUrl()); 
                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri); 

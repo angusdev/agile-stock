@@ -48,4 +48,6 @@
 	<string name="tab_stock">Portfolio</string>
 	<string name="tab_index">Index</string>
 	<string name="tab_quick">Quick Quote</string>
+	
+	<string name="error_reporting_server">http://android-error-report.heroku.com/report</string>
 </resources>

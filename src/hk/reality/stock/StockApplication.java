@@ -17,8 +17,7 @@ import com.nullwire.trace.ExceptionHandler;
 
 public class StockApplication extends Application {
     private static final String TAG = "StockApplication";
-    private static final String ERROR_SERVER = "http://android-error-report.heroku.com/report";
-    
+
     private static PortfolioService portfolioService;
     private static Portfolio currentPortfolio;
     private static ExecutorService executor; 
@@ -26,7 +25,7 @@ public class StockApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ExceptionHandler.register(this, ERROR_SERVER);
+        ExceptionHandler.register(this, getString(R.string.error_reporting_server));
 
         portfolioService = new FilePortfolioService(this.getFilesDir());
         executor = Executors.newFixedThreadPool(SettingsActivity.getConcurrent(this));

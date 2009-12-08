@@ -8,6 +8,7 @@ import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.Lang;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
+import hk.reality.utils.ActivityHelper;
 import hk.reality.utils.NetworkDetector;
 
 import java.util.List;
@@ -89,13 +90,13 @@ public class StockSearchTask extends AsyncTask<String, Void, Stock> {
                 Toast.makeText(activity, R.string.msg_no_network, Toast.LENGTH_LONG).show();
                 break;
             case ERROR_DOWNLOAD:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_DOWNLOAD_PORTFOLIO);
+                ActivityHelper.showDialogQuitely(activity, PortfolioActivity.DIALOG_ERR_DOWNLOAD_PORTFOLIO);
                 break;
             case ERROR_PARSE:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_QUOTE);
+                ActivityHelper.showDialogQuitely(activity, PortfolioActivity.DIALOG_ERR_QUOTE);
                 break;
             case ERROR_UNKNOWN:
-                activity.showDialog(PortfolioActivity.DIALOG_ERR_UNEXPECTED);
+                ActivityHelper.showDialogQuitely(activity, PortfolioActivity.DIALOG_ERR_UNEXPECTED);
                 break;
             default:
                 break;

@@ -48,8 +48,8 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
             
             double price = json.getDouble("np");
             double change = price - preClosePrice;
-            double changePercent = (price - preClosePrice) / preClosePrice;
-            
+            double changePercent = (preClosePrice == 0) ? 0 : (price - preClosePrice) / preClosePrice;
+
             Log.i(TAG, "change and change percent: " + change + ", " + changePercent + 
                     ". preClose: " + preClosePrice + ", price =" + price);
             d.setPrice(new BigDecimal(json.getString("np")));

@@ -3,6 +3,7 @@ package hk.reality.stock.view;
 import hk.reality.stock.R;
 import hk.reality.stock.model.Stock;
 import hk.reality.stock.model.StockDetail;
+import hk.reality.utils.ExceptionHelper;
 import hk.reality.utils.PriceFormatter;
 
 import java.util.Comparator;
@@ -12,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import android.widget.TextView;
 
 public class StockAdapter extends ArrayAdapter<Stock> {
     private java.text.DateFormat formatter;
+    public static final String TAG = "StockAdapter";
+
     public StockAdapter(Context context) {
         super(context, 0);
         formatter = DateFormat.getTimeFormat(context);
@@ -54,15 +58,24 @@ public class StockAdapter extends ArrayAdapter<Stock> {
             		PriceFormatter.forStockPrice(detail.getChangePrice().doubleValue()), 
             		PriceFormatter.forPercent(detail.getChangePricePercent().doubleValue())));
             
-            if (detail.getChangePrice().floatValue() > 0) {
-                price.setTextColor(Color.rgb(0, 213, 65));
-                change.setTextColor(Color.rgb(0, 213, 65));
-            } else if (detail.getChangePrice().floatValue() < 0) {
-                price.setTextColor(Color.rgb(238, 30, 0));
-                change.setTextColor(Color.rgb(238, 90, 60));
-            } else {
+            try {
+                if (detail.getChangePrice().floatValue() > 0) {
+                    price.setTextColor(Color.rgb(0, 213, 65));
+                    change.setTextColor(Color.rgb(0, 213, 65));
+                } else if (detail.getChangePrice().floatValue() < 0) {
+                    price.setTextColor(Color.rgb(238, 30, 0));
+                    change.setTextColor(Color.rgb(238, 90, 60));
+                } else {
+                    price.setTextColor(Color.WHITE);
+                    change.setTextColor(Color.WHITE);
+                }
+            } catch (ArithmeticException ae) {
                 price.setTextColor(Color.WHITE);
                 change.setTextColor(Color.WHITE);
+                
+                // check if this work as expected, if not, remove it
+                Log.e(TAG, "unexpected error while getting float value from change price", ae);
+                ExceptionHelper.report(ae);
             }
         } else {
             time.setText("");

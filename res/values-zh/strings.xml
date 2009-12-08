@@ -47,4 +47,6 @@
 	<string name="tab_stock">投資組合</string>
 	<string name="tab_index">環球指數</string>
 	<string name="tab_quick">快速股價</string>
+	
+	<string name="error_reporting_server">http://android-error-report.heroku.com/report</string>
 </resources>
