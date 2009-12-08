@@ -7,7 +7,7 @@
     <string name="about_title">關於本軟體</string>
     <string name="disclaimer_label">免責條款</string>
     <string name="msg_disclaimer">本軟件顯示的資料乃根據在第三方網站所提供的公開資料。\n\n我們不保證該等資料絕對正確可靠；對於任何因資料不確或遺漏又或因根據或倚賴本網站資料所作決定、行動或不行動而引致之損失或損害，本軟體概不負責（不論是民事侵權行為責任或合約責任或其他）。</string>
-    <string name="msg_about">本軟體由 @siuying (http://twitter.com/siuying) 提供\n\n資料來自 HKEX (http://www.hkex.com.hk) 和 Money 18 (http://money18.on.cc)的公開網站 \n\nAgile Stock 使用以下開源軟體：\n * HtmlCleaner\n * XStream\n * Apache Commons IO\n * Apache Commons Lang</string>
+    <string name="msg_about">本軟體由 @siuying (http://twitter.com/siuying) 提供\n\n資料來自 HKEX (http://www.hkex.com.hk) 和 Money 18 (http://money18.on.cc)的公開網站 \n\nAgile Stock 使用以下開源軟體：\n * HtmlCleaner\n * XStream\n * Apache Commons IO\n * Apache Commons Lang\n * android-remote-stacktrace</string>
     <string name="retry_label">重試</string>
     <string name="ok_label">確認</string>
     <string name="cancel_label">取消</string>
