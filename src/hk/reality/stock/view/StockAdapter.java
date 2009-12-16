@@ -3,7 +3,7 @@ package hk.reality.stock.view;
 import hk.reality.stock.R;
 import hk.reality.stock.model.Stock;
 import hk.reality.stock.model.StockDetail;
-import hk.reality.utils.ExceptionHelper;
+import hk.reality.util.ExceptionHelper;
 import hk.reality.utils.PriceFormatter;
 
 import java.util.Comparator;
@@ -75,7 +75,9 @@ public class StockAdapter extends ArrayAdapter<Stock> {
                 
                 // check if this work as expected, if not, remove it
                 Log.e(TAG, "unexpected error while getting float value from change price", ae);
-                ExceptionHelper.report(ae);
+                RuntimeException re = new RuntimeException("unexpected error while getting float value " +
+                		"from change price, stock detail = " + stock.toString(), ae);
+                ExceptionHelper.report(re);
             }
         } else {
             time.setText("");
