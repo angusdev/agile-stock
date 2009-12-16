@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/htmlcleaner2_1.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-android.jar"/>
 	<classpathentry kind="lib" path="lib/trace.jar"/>
+	<classpathentry kind="lib" path="lib/reality-commons.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

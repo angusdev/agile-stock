@@ -8,8 +8,8 @@ import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.Lang;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
-import hk.reality.utils.ActivityHelper;
-import hk.reality.utils.NetworkDetector;
+import hk.reality.util.ActivityHelper;
+import hk.reality.util.NetworkDetector;
 
 import java.util.List;
 

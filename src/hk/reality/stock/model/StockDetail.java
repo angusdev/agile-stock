@@ -186,4 +186,16 @@ public class StockDetail implements Serializable {
             return false;
         return true;
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return String
+                .format(
+                        "StockDetail [quote=%s, price=%s, changePrice=%s, changePricePercent=%s, dayHigh=%s, dayLow=%s, volume=%s, sourceUrl=%s, updatedAt=%s]",
+                        quote, price, changePrice, changePricePercent, dayHigh,
+                        dayLow, volume, sourceUrl, updatedAt);
+    }
 }
