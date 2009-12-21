@@ -174,7 +174,7 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     private String getTimestamp() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Hong Kong"));
         String ts = cal.getTime().getTime() + "";
-        ts = ts.substring(0, 10) + "7" + ts.substring(11, 13); 
+        ts = ts.substring(0, 10) + "1" + ts.substring(11, 13); 
         return ts;
     }
 }

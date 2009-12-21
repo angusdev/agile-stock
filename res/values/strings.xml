@@ -50,4 +50,11 @@
 	<string name="tab_quick">Quick Quote</string>
 	
 	<string name="error_reporting_server">http://android-error-report.heroku.com/report</string>
+	
+   	<string name="update.url">http://update.reality.hk</string>
+	<string name="update.package">hk.reality.stock</string>
+	<string name="update.download">下載</string>
+	<string name="update.later">稍後提醒我</string>
+	<string name="update.ignore">忽略</string>
+	<string name="update.available">找到程式更新</string>
 </resources>
