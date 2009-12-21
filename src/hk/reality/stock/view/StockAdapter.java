@@ -54,31 +54,32 @@ public class StockAdapter extends ArrayAdapter<Stock> {
             name.setText(stock.getName());
             quote.setText(detail.getQuote());
             price.setText(PriceFormatter.forStockPrice(detail.getPrice().doubleValue()));
-            change.setText(String.format("%s (%s)", 
-            		PriceFormatter.forStockPrice(detail.getChangePrice().doubleValue()), 
-            		PriceFormatter.forPercent(detail.getChangePricePercent().doubleValue())));
-            
+
             try {
-                if (detail.getChangePrice().floatValue() > 0) {
-                    price.setTextColor(Color.rgb(0, 213, 65));
-                    change.setTextColor(Color.rgb(0, 213, 65));
-                } else if (detail.getChangePrice().floatValue() < 0) {
-                    price.setTextColor(Color.rgb(238, 30, 0));
-                    change.setTextColor(Color.rgb(238, 90, 60));
-                } else {
-                    price.setTextColor(Color.WHITE);
-                    change.setTextColor(Color.WHITE);
-                }
+                change.setText(String.format("%s (%s)", 
+                        PriceFormatter.forStockPrice(detail.getChangePrice().doubleValue()), 
+                        PriceFormatter.forPercent(detail.getChangePricePercent().doubleValue())));              
             } catch (ArithmeticException ae) {
-                price.setTextColor(Color.WHITE);
-                change.setTextColor(Color.WHITE);
-                
+                change.setText("--");
+
                 // check if this work as expected, if not, remove it
                 Log.e(TAG, "unexpected error while getting float value from change price", ae);
                 RuntimeException re = new RuntimeException("unexpected error while getting float value " +
-                		"from change price, stock detail = " + stock.toString(), ae);
+                        "from change price, stock detail = " + stock.toString(), ae);
                 ExceptionHelper.report(re);
             }
+
+            if (detail.getChangePrice().floatValue() > 0) {
+                price.setTextColor(Color.rgb(0, 213, 65));
+                change.setTextColor(Color.rgb(0, 213, 65));
+            } else if (detail.getChangePrice().floatValue() < 0) {
+                price.setTextColor(Color.rgb(238, 30, 0));
+                change.setTextColor(Color.rgb(238, 90, 60));
+            } else {
+                price.setTextColor(Color.WHITE);
+                change.setTextColor(Color.WHITE);
+            }
+
         } else {
             time.setText("");
             volume.setText("---");
