@@ -16,4 +16,10 @@
 		<item>300000</item>
 		<item>900000</item>
 	</array>
+	
+	<array name="support_option">
+      <item>@string/support1</item>
+	  <item>@string/support2</item>
+	  <item>@string/support3</item>       
+    </array>
 </resources>

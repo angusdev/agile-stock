@@ -4,7 +4,6 @@ import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.fetcher.QuoteUpdateTask;
 import hk.reality.stock.service.searcher.StockSearchTask;
 import hk.reality.stock.view.StockAdapter;
-import hk.reality.talk.R;
 
 import java.util.List;
 
