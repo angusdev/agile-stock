@@ -48,5 +48,10 @@
 	<string name="tab_index">環球指數</string>
 	<string name="tab_quick">快速股價</string>
 	
+	<string name="support0">你可以用 Paypal 捐贈現金以支持本軟件的開發</string>
+	<string name="support1">Redbull一支，支援我通宵工作一晚 (USD 1.99)</string>
+	<string name="support2">Redbull一箱，支援我通宵工作一週！(USD 11.99)</string>
+	<string name="support3">Redbull四箱，支援伺服器運作一個月！(USD 39.99)</string>
+	
 	<string name="error_reporting_server">http://android-error-report.heroku.com/report</string>
 </resources>

@@ -53,8 +53,13 @@
 	
    	<string name="update.url">http://update.reality.hk</string>
 	<string name="update.package">hk.reality.stock</string>
-	<string name="update.download">下載</string>
-	<string name="update.later">稍後提醒我</string>
-	<string name="update.ignore">忽略</string>
-	<string name="update.available">找到程式更新</string>
+	<string name="update.download">Download</string>
+	<string name="update.later">Remind Later</string>
+	<string name="update.ignore">Ignore</string>
+	<string name="update.available">Update available</string>
+	
+	<string name="support0">Support development of this software by cash:</string>
+	<string name="support1">Redbull 1，support me work overnight (USD 1.99)</string>
+	<string name="support2">Redbull 1 boxes，support me work overnight for a week! (USD 11.99)</string>
+	<string name="support3">Redbull 4 boxes，support server running a month! (USD 39.99)</string>
 </resources>

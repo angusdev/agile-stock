@@ -4,6 +4,7 @@ import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.fetcher.QuoteUpdateTask;
 import hk.reality.stock.service.searcher.StockSearchTask;
 import hk.reality.stock.view.StockAdapter;
+import hk.reality.talk.R;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class PortfolioActivity extends BaseStockActivity {
     public static final int DIALOG_ADD_STOCK = 100;
     public static final int DIALOG_ADD_IN_PROGRESS = 101;
     public static final int DIALOG_DISCLAIMER = 103;
+    public static final int DIALOG_SUPPORT = 105;
     
     public static final int DIALOG_ERR_DOWNLOAD_UPDATE = 400;
     public static final int DIALOG_ERR_QUOTE = 401;
@@ -106,6 +108,31 @@ public class PortfolioActivity extends BaseStockActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
+        case DIALOG_SUPPORT:
+            final String[] urls = new String[] {"10495932", "10495985", "10496006"};
+            final Intent openUrl = new Intent(Intent.ACTION_VIEW);
+            AlertDialog supportDialog = new AlertDialog.Builder(this)
+            .setTitle(R.string.support0)
+            .setItems(R.array.support_option,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(
+                                DialogInterface dialoginterface, int i) {
+                            switch (i) {
+                            case 0:
+                            case 1:
+                            case 2:
+                                String url = String.format("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=%s", urls[i]);
+                                Log.i(TAG, "open url: " + url);
+                                openUrl.setDataAndType(Uri.parse(url), "text/html");
+                                startActivity(openUrl);
+                                break;
+                            default:
+                                throw new IllegalArgumentException(
+                                        "unhandled menu item" + i);
+                            }
+                        }
+                    }).create();
+            return supportDialog;
         case DIALOG_DISCLAIMER:
             AlertDialog disclaimerDialog = new AlertDialog.Builder(this)
             .setTitle(R.string.disclaimer_label)
