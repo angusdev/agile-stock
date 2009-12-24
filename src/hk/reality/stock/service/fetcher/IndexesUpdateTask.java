@@ -3,6 +3,7 @@ package hk.reality.stock.service.fetcher;
 import hk.reality.stock.IndexActivity;
 import hk.reality.stock.R;
 import hk.reality.stock.model.Index;
+import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 import hk.reality.stock.view.IndexAdapter;
@@ -37,6 +38,10 @@ public class IndexesUpdateTask extends AsyncTask<Void, Integer, Boolean> {
             return Boolean.FALSE;
         }
 
+        // run this before fetching quote
+        // this fetch the proper timestamp modifier for money18.on.cc
+        Money18Service.getInstance().getTimestamp();
+        
         Log.i(TAG, "start fetcher");
         IndexesFetcher fetcher = IndexesFetcherFactory.getIndexesFetcher(activity);
         

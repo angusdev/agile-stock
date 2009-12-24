@@ -5,6 +5,7 @@ import hk.reality.stock.R;
 import hk.reality.stock.StockApplication;
 import hk.reality.stock.model.Stock;
 import hk.reality.stock.model.StockDetail;
+import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 import hk.reality.util.ActivityHelper;
@@ -49,6 +50,11 @@ public class QuoteUpdateTask extends AsyncTask<Stock, Integer, Boolean> {
 
         ExecutorService executor = StockApplication.getExecutor();
         try {
+            // run this before fetching quote
+            // this fetch the proper timestamp modifier for money18.on.cc
+            Money18Service.getInstance().getTimestamp();
+            
+            // actually fetching stock quote
             ArrayList<Future<StockDetail>> results = new ArrayList<Future<StockDetail>>();
             for(Stock s : stocks) {
                 UpdateSubTask task = new UpdateSubTask(fetcher, s);

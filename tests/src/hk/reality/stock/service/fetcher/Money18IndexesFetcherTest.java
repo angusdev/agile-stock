@@ -1,6 +1,7 @@
 package hk.reality.stock.service.fetcher;
 
 import hk.reality.stock.model.Index;
+import hk.reality.stock.service.Money18Service;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Money18IndexesFetcherTest extends AndroidTestCase {
     }
     
     protected IndexesFetcher getFetcher() {
-        return new Money18IndexesFetcher(this.getContext());
+        return new Money18IndexesFetcher(this.getContext(), Money18Service.getInstance());
     }
     
 }

@@ -1,6 +1,7 @@
 package hk.reality.stock.service.fetcher;
 
 import hk.reality.stock.model.StockDetail;
+import hk.reality.stock.service.Money18Service;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -56,7 +57,7 @@ public class Money18QuoteFetcherTest extends TestCase {
     }
     
     protected QuoteFetcher getFetcher() {
-        return new Money18QuoteFetcher();
+        return new Money18QuoteFetcher(Money18Service.getInstance());
     }
     
 }

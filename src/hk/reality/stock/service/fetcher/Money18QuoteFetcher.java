@@ -2,6 +2,7 @@ package hk.reality.stock.service.fetcher;
 
 import static hk.reality.stock.service.fetcher.Utils.preprocessJson;
 import hk.reality.stock.model.StockDetail;
+import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 
@@ -10,7 +11,6 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -24,11 +24,17 @@ import android.util.Log;
 public class Money18QuoteFetcher extends BaseQuoteFetcher {
     private static final String TAG = "Money18QuoteFetcher";
     private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
+    private Money18Service service;
+    
+    public Money18QuoteFetcher(Money18Service service){
+        this.service = service;
+    }
 
     @Override
     public StockDetail fetch(String quote) throws DownloadException, ParseException {
         StockDetail d = new StockDetail();
         String content = null;
+
         String openUrl = getOpenUrl(quote);
         HttpGet openReq = new HttpGet(openUrl);
         try {
@@ -92,7 +98,7 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     
     private String getOpenUrl(String quote) {
         String url = String.format("http://money18.on.cc/js/daily/quote/%s_d.js?t=%s", 
-                quote, getTimestamp()); 
+                quote, service.getTimestamp()); 
         Log.d(TAG, "open url: " + url);
         return url;
     }
@@ -100,15 +106,9 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     private String getUpdateUrl(String quote) {
         String url = String.format("http://money18.on.cc/js/real/quote/%s_r.js?t=%s", 
                 quote, 
-                getTimestamp());
+                service.getTimestamp());
         Log.d(TAG, "update url: " + url);
         return url;
     }
-    
-    private String getTimestamp() {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Hong Kong"));
-        String ts = cal.getTime().getTime() + "";
-        ts = ts.substring(0, 10) + "3" + ts.substring(11, 13); 
-        return ts;
-    }
+
 }

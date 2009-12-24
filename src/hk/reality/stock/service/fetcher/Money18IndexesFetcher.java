@@ -2,6 +2,7 @@ package hk.reality.stock.service.fetcher;
 
 import hk.reality.stock.R;
 import hk.reality.stock.model.Index;
+import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
@@ -30,9 +30,11 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     private static final String TAG = "Money18IndexesFetcher";
 
     private Context context;
+    private Money18Service service;
     
-    public Money18IndexesFetcher(Context context) {
+    public Money18IndexesFetcher(Context context, Money18Service service) {
         this.context = context;
+        this.service = service;
     }
 
     @Override
@@ -82,14 +84,14 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
     
     private String getHSIURL() {
         String url = String.format("http://money18.on.cc/js/real/index/HSI_r.js?t=%s", 
-                getTimestamp());
+                service.getTimestamp());
         Log.d(TAG, "HSIURL: " + url);
         return url;
     }
     
     private String getWorldIndexURL() {
         String url = String.format("http://money18.on.cc/js/daily/worldidx/worldidx_b.js?t=%s", 
-                getTimestamp());
+                service.getTimestamp());
         Log.d(TAG, "WorldIndexURL: " + url);
         return url;
     }
@@ -168,13 +170,5 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
 
     private String getReferer() {
         return "http://money18.on.cc/info/liveinfo_idx.html&refer=refresh";
-    }
-    
-    
-    private String getTimestamp() {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Hong Kong"));
-        String ts = cal.getTime().getTime() + "";
-        ts = ts.substring(0, 10) + "3" + ts.substring(11, 13); 
-        return ts;
     }
 }
