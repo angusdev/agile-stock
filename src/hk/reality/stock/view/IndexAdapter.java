@@ -1,5 +1,7 @@
 package hk.reality.stock.view;
 
+import java.math.BigDecimal;
+
 import hk.reality.stock.R;
 import hk.reality.stock.model.Index;
 import hk.reality.utils.PriceFormatter;
@@ -43,7 +45,7 @@ public class IndexAdapter extends ArrayAdapter<Index> {
         if (index != null) {
             volume.setText("");
             name.setText(index.getName());
-            price.setText(PriceFormatter.forIndexPrice(index.getValue().doubleValue()));
+            price.setText(PriceFormatter.forIndexPrice(index.getValue()));
 
             if (index.getUpdatedAt() != null) {
                 time.setText(formatter.format(index.getUpdatedAt().getTime()));
@@ -53,8 +55,8 @@ public class IndexAdapter extends ArrayAdapter<Index> {
             
             if (index.getChange() != null) {
                 change.setText(String.format("%s (%s)", 
-                		PriceFormatter.forStockPrice(index.getChange().doubleValue()), 
-                		PriceFormatter.forPercent(index.getChangePercent().doubleValue())));
+                		PriceFormatter.forStockPrice(index.getChange()), 
+                		PriceFormatter.forPercent(index.getChangePercent().multiply(new BigDecimal(100)))));
             } else {
                 change.setText("---- (---)");
             }

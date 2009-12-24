@@ -1,5 +1,6 @@
 package hk.reality.utils;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 public class PriceFormatter {
@@ -10,12 +11,23 @@ public class PriceFormatter {
     public static String forStockPrice(double value) {
         return stockPriceFormat.format(value);
     }
+    
+    public static String forStockPrice(BigDecimal value) {
+        return stockPriceFormat.format(value);
+    }
 
     public static String forIndexPrice(double value) {
         return indexPriceFormat.format(value);
     }
+    
+    public static String forIndexPrice(BigDecimal value) {
+        return indexPriceFormat.format(value);
+    }
 
     public static String forPercent(double value) {
+        return percentFormat.format(value);
+    }
+    public static String forPercent(BigDecimal value) {
         return percentFormat.format(value);
     }
 }

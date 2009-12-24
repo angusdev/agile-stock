@@ -8,6 +8,7 @@ import hk.reality.stock.service.exception.ParseException;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,14 +62,13 @@ public class Money18IndexesFetcher extends BaseIndexesFetcher {
             updatedAt.setTime(updateTime);
             hsi.setUpdatedAt(updatedAt);
             
-            double value = json.getDouble("value");
-            double change = json.getDouble("difference");
-            double changePercent = change / value;
+            BigDecimal value = new BigDecimal(json.getString("value"));
+            BigDecimal change = new BigDecimal(json.getString("difference"));
             
             hsi.setName(getContext().getString(R.string.msg_hsi));
-            hsi.setValue(new BigDecimal(json.getString("value")));
-            hsi.setChange(new BigDecimal(change));
-            hsi.setChangePercent(new BigDecimal(changePercent));
+            hsi.setValue(value);
+            hsi.setChange(change);
+            hsi.setChangePercent(change.divide(value, MathContext.DECIMAL64));
     
             return hsi;
         } catch (org.apache.http.ParseException pe) {

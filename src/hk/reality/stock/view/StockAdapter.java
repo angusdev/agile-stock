@@ -6,6 +6,7 @@ import hk.reality.stock.model.StockDetail;
 import hk.reality.util.ExceptionHelper;
 import hk.reality.utils.PriceFormatter;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 
 import org.apache.commons.lang.StringUtils;
@@ -53,12 +54,12 @@ public class StockAdapter extends ArrayAdapter<Stock> {
             volume.setText(detail.getVolume());
             name.setText(stock.getName());
             quote.setText(detail.getQuote());
-            price.setText(PriceFormatter.forStockPrice(detail.getPrice().doubleValue()));
+            price.setText(PriceFormatter.forStockPrice(detail.getPrice()));
 
             try {
                 change.setText(String.format("%s (%s)", 
-                        PriceFormatter.forStockPrice(detail.getChangePrice().doubleValue()), 
-                        PriceFormatter.forPercent(detail.getChangePricePercent().doubleValue())));              
+                        PriceFormatter.forStockPrice(detail.getChangePrice()), 
+                        PriceFormatter.forPercent(detail.getChangePricePercent().multiply(new BigDecimal(100)))));              
             } catch (ArithmeticException ae) {
                 change.setText("--");
 

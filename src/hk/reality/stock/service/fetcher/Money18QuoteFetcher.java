@@ -8,6 +8,7 @@ import hk.reality.stock.service.exception.ParseException;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,8 +43,9 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
             HttpResponse resp = getClient().execute(openReq);
             content = EntityUtils.toString(resp.getEntity());
             JSONObject json = preprocessJson(content);
-            double preClosePrice = json.getDouble("preCPrice");
-
+            String preClosePriceStr = json.getString("preCPrice");
+            BigDecimal preClose = new BigDecimal(preClosePriceStr);
+            
             String updateUrl = getUpdateUrl(quote);
             HttpGet req = new HttpGet(updateUrl);
             req.addHeader("Referer", updateUrl);
@@ -51,16 +53,11 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
             resp = getClient().execute(req);
             content = EntityUtils.toString(resp.getEntity());
             json = preprocessJson(content);
-            
-            double price = json.getDouble("np");
-            double change = price - preClosePrice;
-            double changePercent = (preClosePrice == 0) ? 0 : (price - preClosePrice) / preClosePrice;
 
-            Log.i(TAG, "change and change percent: " + change + ", " + changePercent + 
-                    ". preClose: " + preClosePrice + ", price =" + price);
             d.setPrice(new BigDecimal(json.getString("np")));
-            d.setChangePrice(new BigDecimal(change));
-            d.setChangePricePercent(new BigDecimal(changePercent));
+            d.setChangePrice(d.getPrice().subtract(preClose));
+            
+            d.setChangePricePercent(preClose.equals(BigDecimal.ZERO) ? BigDecimal.ZERO : d.getChangePrice().divide(preClose, MathContext.DECIMAL64));
             d.setDayHigh(new BigDecimal(json.getString("dyh")));
             d.setDayLow(new BigDecimal(json.getString("dyl")));
             d.setQuote(quote);
