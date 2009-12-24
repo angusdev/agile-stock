@@ -3,6 +3,7 @@ package hk.reality.stock;
 import hk.reality.stock.model.Portfolio;
 import hk.reality.stock.model.Stock;
 import hk.reality.stock.service.FilePortfolioService;
+import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.PortfolioService;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class StockApplication extends Application {
 
     @Override
     public void onTerminate() {
+        Money18Service.clearCache();
         super.onTerminate();
     }
 
