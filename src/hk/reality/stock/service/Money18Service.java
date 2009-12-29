@@ -46,7 +46,7 @@ public class Money18Service {
         }
     }
     
-    private String findReplacement() {
+    private synchronized String findReplacement() {
         if (cachedReplacement != null) {
             Log.d(TAG, "use cached m18-lib.js");
             return cachedReplacement;
