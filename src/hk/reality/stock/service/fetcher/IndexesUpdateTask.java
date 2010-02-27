@@ -40,10 +40,8 @@ public class IndexesUpdateTask extends AsyncTask<Void, Integer, Boolean> {
 
         // run this before fetching quote
         // this fetch the proper timestamp modifier for money18.on.cc
-        Money18Service.getInstance().getTimestamp();
-        
-        Log.i(TAG, "start fetcher");
-        IndexesFetcher fetcher = IndexesFetcherFactory.getIndexesFetcher(activity);
+        String ts = Money18Service.getInstance().getTimestamp();
+        IndexesFetcher fetcher = IndexesFetcherFactory.getIndexesFetcher(activity, ts);
         
         try {
             results = fetcher.fetch();

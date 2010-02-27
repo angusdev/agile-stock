@@ -57,7 +57,7 @@ public class Money18QuoteFetcherTest extends TestCase {
     }
     
     protected QuoteFetcher getFetcher() {
-        return new Money18QuoteFetcher(Money18Service.getInstance());
+        return new Money18QuoteFetcher("");
     }
     
 }

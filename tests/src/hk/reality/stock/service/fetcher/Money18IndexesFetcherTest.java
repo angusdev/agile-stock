@@ -30,7 +30,7 @@ public class Money18IndexesFetcherTest extends AndroidTestCase {
     }
     
     protected IndexesFetcher getFetcher() {
-        return new Money18IndexesFetcher(this.getContext(), Money18Service.getInstance());
+        return new Money18IndexesFetcher(this.getContext(), "");
     }
     
 }

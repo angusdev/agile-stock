@@ -17,8 +17,7 @@ public class Money18Service {
     public static final String TAG = "Money18Service";
     
     private static Money18Service instance;
-    private static String cachedReplacement = null;
-    
+
     public synchronized static Money18Service getInstance() {
         if (instance == null) {
             instance = new Money18Service();
@@ -47,11 +46,6 @@ public class Money18Service {
     }
     
     private synchronized String findReplacement() {
-        if (cachedReplacement != null) {
-            Log.d(TAG, "use cached m18-lib.js");
-            return cachedReplacement;
-        }
-
         try {
             Log.d(TAG, "reading latest m18-lib.js");
             String lib = WebUtil.fetch("http://money18.on.cc/js/m18-lib.js");
@@ -59,11 +53,7 @@ public class Money18Service {
                 Pattern p = Pattern.compile("\"([0-9])\"\\+a\\.substring");
                 Matcher m = p.matcher(lib);
                 if (m.find()) {
-                    cachedReplacement = m.group(1);
-                    Log.i(TAG, "replacement=" + cachedReplacement);
-                    return cachedReplacement;
-                } else {
-                    Log.w(TAG, "replacement not found");
+                    return m.group(1);
                 }
             }
         } catch (ClientProtocolException e) {
@@ -74,12 +64,5 @@ public class Money18Service {
             Log.e(TAG, "unexpected error", re);
         }
         return "3";        
-    }
-    
-    /**
-     * clear cache
-     */
-    public synchronized static void clearCache() {
-        cachedReplacement = null;
     }
 }

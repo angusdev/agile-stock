@@ -2,7 +2,6 @@ package hk.reality.stock.service.fetcher;
 
 import static hk.reality.stock.service.fetcher.Utils.preprocessJson;
 import hk.reality.stock.model.StockDetail;
-import hk.reality.stock.service.Money18Service;
 import hk.reality.stock.service.exception.DownloadException;
 import hk.reality.stock.service.exception.ParseException;
 
@@ -25,10 +24,10 @@ import android.util.Log;
 public class Money18QuoteFetcher extends BaseQuoteFetcher {
     private static final String TAG = "Money18QuoteFetcher";
     private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
-    private Money18Service service;
+    private String timestamp;
     
-    public Money18QuoteFetcher(Money18Service service){
-        this.service = service;
+    public Money18QuoteFetcher(String timestamp){
+        this.timestamp = timestamp;
     }
 
     @Override
@@ -95,7 +94,7 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     
     private String getOpenUrl(String quote) {
         String url = String.format("http://money18.on.cc/js/daily/quote/%s_d.js?t=%s", 
-                quote, service.getTimestamp()); 
+                quote, timestamp); 
         Log.d(TAG, "open url: " + url);
         return url;
     }
@@ -103,7 +102,7 @@ public class Money18QuoteFetcher extends BaseQuoteFetcher {
     private String getUpdateUrl(String quote) {
         String url = String.format("http://money18.on.cc/js/real/quote/%s_r.js?t=%s", 
                 quote, 
-                service.getTimestamp());
+                timestamp);
         Log.d(TAG, "update url: " + url);
         return url;
     }

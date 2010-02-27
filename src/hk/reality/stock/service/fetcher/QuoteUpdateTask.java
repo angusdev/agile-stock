@@ -44,15 +44,14 @@ public class QuoteUpdateTask extends AsyncTask<Stock, Integer, Boolean> {
         }
         
         total = stocks.length;
-        QuoteFetcher fetcher = QuoteFetcherFactory.getQuoteFetcher();
+
+        String timestamp = Money18Service.getInstance().getTimestamp();
+        QuoteFetcher fetcher = QuoteFetcherFactory.getQuoteFetcher(timestamp);
         fetcher.getClient().getConnectionManager().closeExpiredConnections(); // close previously opened conn
         fetcher.getClient().getConnectionManager().closeIdleConnections(30, TimeUnit.SECONDS);
 
         ExecutorService executor = StockApplication.getExecutor();
         try {
-            // run this before fetching quote
-            // this fetch the proper timestamp modifier for money18.on.cc
-            Money18Service.getInstance().getTimestamp();
             
             // actually fetching stock quote
             ArrayList<Future<StockDetail>> results = new ArrayList<Future<StockDetail>>();
