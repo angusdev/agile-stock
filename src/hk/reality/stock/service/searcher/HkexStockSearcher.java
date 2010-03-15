@@ -26,7 +26,7 @@ import android.util.Log;
 
 public class HkexStockSearcher implements StockSearcher {
     private static final String TAG = "HKEX";
-    private static final String BASE_URL = "http://www.hkex.com.hk/invest/company/profile_page_%s.asp?WidCoID=%s&WidCoAbbName=&Month=";
+    private static final String BASE_URL = "http://www.hkex.com.hk/%s/invest/company/profile_page_%s.asp?WidCoID=%s&WidCoAbbName=&Month=";
 
     private static final String BEGIN = "#66CCFF\">";
     private static final String END = "</font>";
@@ -101,8 +101,9 @@ public class HkexStockSearcher implements StockSearcher {
     }
 
     private String getStockURL(String quote, Lang lang) {
+    	String langName = lang.equals(Lang.CHI) ? "chi" : "eng";
         String langCode = lang.equals(Lang.CHI) ? "c" : "e";
-        String baseURL = String.format(BASE_URL, langCode, quote);
+        String baseURL = String.format(BASE_URL, langName, langCode, quote);
         return baseURL;
     }
 }
